@@ -65,7 +65,7 @@ namespace CSharpPractice
 
             // 코딩 컨벤션 -> 변수 규칙을 어떻게 정할지
             // bool : 1바이트(참/거짓)
-                // 참 혹은 거짓이라는 두 가지 값만 같은데 왜 1바이트만 쓰는지 : 컴퓨터가 연산할 때 1비트보다 1바이트를 다루는게 훨씬 빠르다.
+            // 참 혹은 거짓이라는 두 가지 값만 같은데 왜 1바이트만 쓰는지 : 컴퓨터가 연산할 때 1비트보다 1바이트를 다루는게 훨씬 빠르다.
 
             bool b;
             b = true;
@@ -104,9 +104,9 @@ namespace CSharpPractice
             short b_1_1 = (short)a_1_1;
             // 이때 b_1_1에는 -1이 들어있.
             // 이유 :
-                // a_1_1 = 0x 0FFF(2바이트) FFFF(2바이트) 
-                // b_1_1 = 0x FFFF(2바이트 = short는 2바이트까지만 저장 가능)
-                //       = -1 (상위 2바이트를 날린다)
+            // a_1_1 = 0x 0FFF(2바이트) FFFF(2바이트) 
+            // b_1_1 = 0x FFFF(2바이트 = short는 2바이트까지만 저장 가능)
+            //       = -1 (상위 2바이트를 날린다)
 
 
             // 큰 크기에 작은 크기의 형식을 변환하는 경우
@@ -133,7 +133,56 @@ namespace CSharpPractice
             // 즉 float의 경우에는 입력한 최대한 근접한 값을 할당하는 경우가 많다.
             // 그래서 소수 변환을 할 때는 정확한 숫자가 아니라 인접한 숫자를 반환하기에 참고하여야 한다.
             // 소수를 비교할 때는 오차를 염두해두고 비교해야한다.
-            
+
+            //// 데이터 연산
+            // + - * / %
+            hp = 100 + 1;
+            hp = 100 - 1;
+            hp = 100 * 2;
+            hp = 100 / 2;
+             
+            hp = 2 * 100 + 1;
+            Console.WriteLine(hp); // 201;
+            hp = (1 + 2) * 100;
+            Console.WriteLine(hp); // 300;
+            hp = 100 % 3;
+            Console.WriteLine(hp); // 1;
+
+            hp = 100;
+            Console.WriteLine(hp++); // 100;
+            Console.WriteLine(++hp); // 100;
+
+            bool isActive = (hp > 0);
+            bool isHighLevel = (level >= 40);
+
+            // && : AND
+            // || : OR
+            // !  : NOT
+            // a = 살아있는 고렙 유저인가요?
+            bool user_a = isActive && isHighLevel;
+
+            // b = 살아있거나, 고렙 유저이거나, 둘 중 하나인가요?
+            bool user_b = isActive || isHighLevel;
+
+            // c = 죽은 유저인가요?
+            bool user_c = !isActive;
+
+            //// 비트 연산
+            int num = 1;
+
+            // << >>
+            num = num << 3;
+            Console.WriteLine(num); // = 8 : 왼쪽으로 3 칸을 민다.
+
+            num = 8;
+            num = num >> 1;
+            Console.WriteLine(num); // = 4 : 오른쪽으로 1 칸을 민다.
+
+            // &(and) : 비교하는 두 비트가 같으면 1, 아니면 0
+            // 1010 0010 & 0110 1011 = 0011 0110
+            // |(or)  : 비교하는 두 비트 중 하나라도 참이면 1, 아니면 0
+            // ^(xor) : 비교하는 두 비트가 다르면 1, 아니면 1
+            // ~(not) : 하나의 자릿수를 반전
         }
     }
 }
