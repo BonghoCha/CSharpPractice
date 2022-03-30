@@ -224,6 +224,46 @@ namespace CSharpPractice
             }
         }
 
+        class 코드의_흐름_제어
+        {
+            코드의_흐름_제어() {
+                int hp = 100;
+                bool isDead = (hp <= 0);
+
+                if (isDead)
+                {
+                    Console.WriteLine("You ar dead!");
+                    Console.WriteLine("You ar dead!");
+                    Console.WriteLine("You ar dead!");
+                }
+                //if (isDead == false)
+                else
+                {
+                    Console.WriteLine("You ar !");
+                }
+                // if else, if if로 처리할지는 팀 내의 컨벤션에 맞추어 진행
+                // if (condition), if ( condition )으로 처리할지도 팀 내의 컨벤션에 맞추어 진행
+
+                int choice = 0; // 0:가위 1:바위 2:보
+
+                /*
+                if (choice == 0)
+                    Console.WriteLine("가위입니다.");
+                if (choice == 1)
+                    Console.WriteLine("바위입니다.");
+                if (choice == 2)
+                    Console.WriteLine("보입니다.");
+                */
+
+                if (choice == 0)
+                    Console.WriteLine("가위입니다.");
+                else if (choice == 1)
+                    Console.WriteLine("바위입니다.");
+                else if (choice == 2)
+                    Console.WriteLine("보입니다.");
+
+            }
+        }
         static void Main(string[] args)
         {
             
