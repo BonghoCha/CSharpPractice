@@ -6,7 +6,7 @@ namespace CSharpPractice
     {
         class 데이터_갖고_놀기
         {
-            데이터_갖고_놀기()
+            public 데이터_갖고_놀기()
             {
                 //// 정수형식
 
@@ -226,7 +226,7 @@ namespace CSharpPractice
 
         class 코드의_흐름_제어
         {
-            코드의_흐름_제어() {
+            public 코드의_흐름_제어() {
                 int hp = 100;
                 bool isDead = (hp <= 0);
 
@@ -239,7 +239,7 @@ namespace CSharpPractice
                 //if (isDead == false)
                 else
                 {
-                    Console.WriteLine("You ar !");
+                    Console.WriteLine("You are win!");
                 }
                 // if else, if if로 처리할지는 팀 내의 컨벤션에 맞추어 진행
                 // if (condition), if ( condition )으로 처리할지도 팀 내의 컨벤션에 맞추어 진행
@@ -262,11 +262,189 @@ namespace CSharpPractice
                 else if (choice == 2)
                     Console.WriteLine("보입니다.");
 
+
+                switch (choice)
+                {
+                    case 0:
+                        Console.WriteLine("가위입니다.");
+                        break;
+                    case 1:
+                        Console.WriteLine("바위입니다.");
+                        break;
+                    case 2:
+                        Console.WriteLine("보입니다.");
+                        break;
+                    case 3:
+                        Console.WriteLine("치트키입니다.");
+                        break;
+                    default:
+                        Console.WriteLine("다 실패했습니다.");
+                        break;
+                }
+
+
+                Random rand = new Random();
+                int aiChoice = rand.Next(0, 3);  // 0~2사이의 랜덤 값
+                int myChoice = Convert.ToInt32(Console.ReadLine());
+
+                switch (myChoice)
+                {
+                    case 0:
+                        Console.WriteLine("당신의 선택은 가위입니다.");
+                        break;
+                    case 1:
+                        Console.WriteLine("당신의 선택은 바위입니다.");
+                        break;
+                    case 2:
+                        Console.WriteLine("당신의 선택은 보입니다.");
+                        break;
+                }
+
+                switch (aiChoice)
+                {
+                    case 0:
+                        Console.WriteLine("컴퓨터의 선택은 가위입니다.");
+                        break;
+                    case 1:
+                        Console.WriteLine("컴퓨터의 선택은 바위입니다.");
+                        break;
+                    case 2:
+                        Console.WriteLine("컴퓨터의 선택은 보입니다.");
+                        break;
+                }
+
+                // 승리 무승부 패배
+                if (myChoice == aiChoice)
+                {
+                    Console.WriteLine("무승부입니다.");
+                } else if (myChoice == 0 && aiChoice == 2)
+                {
+                    Console.WriteLine("승리입니다.");
+                }
+                else if (myChoice == 1 && aiChoice == 0)
+                {
+                    Console.WriteLine("승리입니다.");
+                }
+                else if (myChoice == 2 && aiChoice == 1)
+                {
+                    Console.WriteLine("승리입니다.");
+                } else
+                {
+                    Console.WriteLine("패배입니다.");
+                }
+
+                //int SCISSORS = 0;
+                //int ROCK = 1;
+                //int PAPER = 2;
+                const int SCISSORS = 0;
+                const int ROCK = 1;
+                const int PAPER = 2;
+                // const = 상수화 시키는 방법
+                // 이름이 겹치지 않도록 신경써야함.
+                // 만약 그룹으로 묶고 싶다면 "열거형" 사용
+
+                switch (myChoice)
+                {
+                    //case SCISSORS:
+                    case (int)Choice.Scissors:
+                        Console.WriteLine("당신의 선택은 가위입니다.");
+                        break;
+                    //case ROCK:
+                    case (int)Choice.Rock:
+                        Console.WriteLine("당신의 선택은 바위입니다.");
+                        break;
+                    //case PAPER:
+                    case (int)Choice.Paper:
+                        Console.WriteLine("당신의 선택은 보입니다.");
+                        break;
+                }
+
+                int count = 5;
+
+                while (count > 0)
+                {
+                    Console.WriteLine("Hello World : " + count);
+                    count--;
+                }
+
+                string answer;
+                do
+                {
+                    Console.WriteLine("강사님은 잘생기셨나요? (y/n) : ");
+                    answer = Console.ReadLine();
+                } while (answer != "y");
+
+                int num = 5;
+
+                bool isPrime = true;
+
+                //for (초기화식; 조건식; 반복식)
+                for (int i = 0; i<num; i++)
+                {
+                    // 실행 순서 : 초기화식 -> 조건식 -> {} 안에 내용 -> 반복식
+                    Console.WriteLine("Hello World : " + i);
+
+                    if ((num % i) == 0)
+                    {
+                        isPrime = false;
+                        Console.WriteLine("소수가 아닙니다.");
+                        break;
+                    }
+
+                    if (i % 3 == 0)
+                    {
+                        Console.WriteLine("3으로 나누어지는 수입니다.");
+                        continue;
+                    }
+                }
+
+                if (isPrime)
+                    Console.WriteLine("소수입니다.");
+                else
+                    Console.WriteLine("소수가 아닙니다.");
+
+
+                // 메소드 함수
+                //한정자 반환형식 이름(매개변수목록)
+                void HelloWorld()
+                {
+                    Console.WriteLine("Hello World");
+                }
+
+                HelloWorld();
+
+                // 덧셈 함수
+                //int Add(int a, int b);
+                //{
+                //    //return a + b;
+                //    int result = a + b;
+                //    return result;
+                //}
+
+                //void AddOne(int number)
+                void AddOne(ref int number)
+                {
+                    number = number + 1;
+                }
+
+                int n = 0;
+                //AddOne(n);
+                Console.WriteLine(n); // 결과 : 0
+
+                AddOne(ref n);
+                Console.WriteLine(n); // 결과 : 1
+            }
+
+            // 열거형
+            enum Choice
+            {
+                Scissors = 0,
+                Rock = 1,
+                Paper = 2
             }
         }
         static void Main(string[] args)
         {
-            
         }
     }
 }
