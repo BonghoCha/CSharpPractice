@@ -433,6 +433,9 @@ namespace CSharpPractice
 
                 AddOne(ref n);
                 Console.WriteLine(n); // 결과 : 1
+
+                int a = 0;
+                AddOne(ref a);
             }
 
             // 열거형
