@@ -436,6 +436,40 @@ namespace CSharpPractice
 
                 int a = 0;
                 AddOne(ref a);
+
+                void Divide(int a, int b, out int result1, out int result2)
+                {
+                    result1 = a / b;
+                    result2 = a % b;
+                }
+
+                int num1 = 10;
+                int num2 = 3;
+
+                //int result1;
+                //int result2;
+
+                Divide(num1, num2, out var result1, out var result2);
+                Console.WriteLine(result1);
+                Console.WriteLine(result2);
+
+                int reti = Add(2, 3);
+                float retf = Add(2f, 3f);
+
+                int retis = Add(2, 3, d: 10);
+                // 선택적 매개변수는 호출 순서를 지켜야하지만, 이렇게 타겟팅하여 넘겨줄 수 있다.
+            }
+
+            int Add(int a, int b, int c = 0, int d = 0)
+            {
+                // c,d = 선택적 매개변수
+                return a + b + c + d;
+            }
+            
+            // 오버로딩
+            float Add(float a, float b)
+            {
+                return a + b;
             }
 
             // 열거형
@@ -446,8 +480,92 @@ namespace CSharpPractice
                 Paper = 2
             }
         }
+
+        class 코드의_흐름_제어_연습문제
+        {
+            public 코드의_흐름_제어_연습문제(int type)
+            {
+                switch (type)
+                {
+                    case 1:
+                        {
+                            // 구구단
+                            for (int i = 2; i <= 9; i++)
+                            {
+                                Console.WriteLine($"{i}단");
+                                for (int j = 1; j <= 9; j++)
+                                {
+                                    Console.WriteLine($"{i} * {j} = {i * j}");
+                                }
+                                Console.WriteLine("");
+                            }
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            // 별찍기 (피라미드)
+                            for (int i = 0; i < 5; i++)
+                            {
+                                for (int j=0; j<=i; j++)
+                                {
+                                    Console.Write("*");
+                                }
+
+                                Console.WriteLine("");
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            // 팩토리얼
+
+                            // for문으로 반환하는 형식
+                            int Factorial(int n)
+                            {
+                                int result = 1;
+                                for (int i=2; i<=n; i++)
+                                {
+                                    result *= i;
+                                }
+                                return result;
+                            }
+
+                            // 재귀함수를 사용하는 형
+                            int Factorial_R(int n)
+                            {
+                                if (n == 1) return 1;
+
+                                return n * Factorial(n-1);
+                            }
+
+                            Console.WriteLine("for : " + Factorial(5));
+                            Console.WriteLine("recursive : " + Factorial_R(5));
+                            break;
+                        }
+                }
+            }
+        }
+
+        class TEXTRPG
+        {
+            public TEXTRPG()
+            {
+                // 디버그
+                // 브레이킹 포인트 설정 > F10(다음 라인), F11(메소드 안까지 디버그)
+            }
+
+            public int Add(int a, int b)
+            {
+                return a + b;
+            }
+        }
+
         static void Main(string[] args)
         {
+            TEXTRPG t = new TEXTRPG();
+            int ret = t.Add(10, 20);
+            Console.WriteLine(ret);
         }
     }
 }
