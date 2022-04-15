@@ -556,6 +556,29 @@ namespace CSharpPractice
                 Archer = 2,
                 Mage = 3
             }
+            struct Player
+            {
+                public ClassType type;
+
+                public int hp;
+                public int attack;
+            }
+
+            enum MonsterType
+            {
+                None = 0,
+                Slime = 1,
+                Orc =2,
+                Skeleton = 3
+            }
+
+            struct Monster
+            {
+                public MonsterType type;
+
+                public int hp;
+                public int attack;
+            }
 
             ClassType ChooseClass()
             {
@@ -622,12 +645,89 @@ namespace CSharpPractice
                 }
             }
 
-            struct Player
+            void CreateRandomMonster(out Monster monster)
             {
-                public ClassType type;
+                Random rand = new Random();
+                int randMonster = rand.Next(1, 4);                
 
-                public int hp;
-                public int attack;
+                switch (randMonster)
+                {
+                    case (int)MonsterType.Slime:
+                        Console.WriteLine("슬라임이 스폰되었습니다.");
+
+                        monster.type = MonsterType.Slime;
+                        monster.hp = 20;
+                        monster.attack = 2;
+                        break;
+                    case (int)MonsterType.Orc:
+                        Console.WriteLine("오크가 스폰되었습니다.");
+
+                        monster.type = MonsterType.Orc;
+                        monster.hp = 40;
+                        monster.attack = 4;
+                        break;
+                    case (int)MonsterType.Skeleton:
+                        Console.WriteLine("스켈레톤이 스폰되었습니다.");
+
+                        monster.type = MonsterType.Skeleton;
+                        monster.hp = 30;
+                        monster.attack = 3;
+                        break;
+                    default:
+                        monster.type = MonsterType.None;
+                        monster.hp = 0;
+                        monster.attack = 0;
+                        break;
+                }
+            }
+            void EnterGame()
+            {
+                while (true)
+                {
+                    Console.WriteLine("게임에 접속했습니다.");
+                    Console.WriteLine("[1] 필드로 간다.");
+                    Console.WriteLine("[2] 로비돌아간다.");
+
+                    string input = Console.ReadLine();
+                    switch (input)
+                    {
+                        case "1":
+                            {
+                                EnterField();
+                                break;
+                            }
+                        case "2":
+                            {
+                                return;
+                            }
+                    }
+                }
+            }
+
+            void EnterField(Player player)
+            {
+
+                while (true)
+                {
+                    Console.WriteLine("필드에 접속했습니다.");
+                    
+                    // 랜덤으로 1~3 몬스터 중 하나를 리스폰
+                    Monster monster;
+                    CreateRandomMonster(out monster);
+
+                    Console.WriteLine("[1] 전투 모드로 돌입");
+                    Console.WriteLine("[2] 일정 확률로 마을로 도망");
+
+                    string input = Console.ReadLine();
+
+                    if (input == "1")
+                    {
+                        Fight()
+                    } else if (input == "2")
+                    {
+
+                    }
+                }
             }
 
             public TEXTRPG()
@@ -645,6 +745,8 @@ namespace CSharpPractice
 
                         // 캐릭터를 선택했을 때 캐릭터 생성
                         CreatePlayer(choice, out player);
+
+                        EnterGame();
                     }
                 }
             }
