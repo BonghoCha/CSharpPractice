@@ -680,7 +680,7 @@ namespace CSharpPractice
                         break;
                 }
             }
-            void EnterGame()
+            void EnterGame(Player player)
             {
                 while (true)
                 {
@@ -693,7 +693,7 @@ namespace CSharpPractice
                     {
                         case "1":
                             {
-                                EnterField();
+                                EnterField(player);
                                 break;
                             }
                         case "2":
@@ -722,7 +722,7 @@ namespace CSharpPractice
 
                     if (input == "1")
                     {
-                        Fight()
+                        Fight(player, monster );
                     } else if (input == "2")
                     {
 
@@ -730,6 +730,10 @@ namespace CSharpPractice
                 }
             }
 
+            void Fight(Player player, Monster monster)
+            {
+
+            }
             public TEXTRPG()
             {
                 // 디버그
@@ -746,7 +750,7 @@ namespace CSharpPractice
                         // 캐릭터를 선택했을 때 캐릭터 생성
                         CreatePlayer(choice, out player);
 
-                        EnterGame();
+                        EnterGame(player);
                     }
                 }
             }
