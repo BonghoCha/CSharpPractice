@@ -722,17 +722,43 @@ namespace CSharpPractice
 
                     if (input == "1")
                     {
-                        Fight(player, monster );
+                        Fight(ref player, ref monster);
                     } else if (input == "2")
                     {
-
+                        Random rand = new Random();
+                        int randValue = rand.Next(0, 101);
+                        if (randValue <= 33)
+                        {
+                            Console.WriteLine("도망치는데 성공했습니다.");
+                            break;
+                        } else
+                        {
+                            Fight(ref player, ref monster);
+                        }
                     }
                 }
             }
 
-            void Fight(Player player, Monster monster)
+            void Fight(ref Player player, ref Monster monster)
             {
+                while (true)
+                {
+                    // 플레이어가 몬스터 공격
+                    monster.hp -= player.attack;
+                    if (monster.hp <= 0)
+                    {
+                        Console.WriteLine("승리했습니다.");
+                        Console.WriteLine($"남은 체력 : {player.hp}");
+                        break;
+                    }
 
+                    player.hp -= monster.attack;
+                    if (player.hp <= 0)
+                    {
+                        Console.WriteLine("패배했습니다.");
+                        break;
+                    }
+                }
             }
             public TEXTRPG()
             {
@@ -761,9 +787,119 @@ namespace CSharpPractice
             }
         }
 
+        class 객체지향_여행
+        {
+            // 객체(OOP Object Oriented Programming)
+            // OOP(은닉성/상속성/다형성)
+
+            class Player // 부모 / 기반
+            {
+                // 필드
+                static public int counter = 1; // 오로지 1개만 존!
+
+                public int id;
+                public int hp;
+                public int attack;
+
+                private int priv_id; // 절대 접근 X
+                public void setPrivateID(int id)
+                {
+                    // 장점 : 함수 호출 스택을 참고해서 어디에서 호출됐는지 찾기 쉽.
+                    priv_id = id;
+                }
+
+                protected int prot_id; // 상속된 자식에서는 접근 가능
+
+                public Player()
+                {
+
+                }
+
+                public Player(int hp) : this()
+                {
+                    this.hp = hp;
+                }
+
+                public void Move()
+                {
+                    Console.WriteLine("Player Move");
+                }
+
+                public void Attack()
+                {
+                    Console.WriteLine("Player Attack");
+                }
+            }
+
+            class Mage
+            {
+
+            }
+
+            class Archer
+            {
+
+            }
+
+            // Knight
+
+            // 속성 : hp, attack, pos
+            // 기능 : Move, Attack, Die 
+
+            class Knight : Player // 자식 / 파생
+            {
+                static public void Test()
+                {
+                    // 공용으로 제공되는 함수이기 때문에 멤버 변수에 접근할 수 없다.
+                    //this.id;
+                    //this.hp;
+                    //this.attack;
+
+                    counter++;
+                }
+
+                public Knight() : base(100) {
+                    // : base()의 뜻 = 부모 생성자 한 번 호!
+
+                    // 각 클래스마다 고유의 ID를 발급해주는 기능(static 응용)
+                    id = counter;
+                    counter++;
+
+                    hp = 100;
+                    attack = 10;
+                }
+
+                public Knight(int hp) : this()
+                {
+                    // : this()의 뜻 = 디폴트 생성자 한 번 호출!
+                    this.hp = hp;
+                }
+
+                public Knight(int hp, int attack)
+                {
+                    this.hp = hp;
+                    this.attack = attack;
+                }
+
+                static Knight CreateKnight()
+                {
+                    // static 함수이기 때문에 Knight.CreateKnight()로 접근 가/
+                    Knight knight = new Knight();
+                    knight.hp = 100;
+                    knight.attack = 10;
+
+                    return knight;
+                }
+            }
+
+            public 객체지향_여행()
+            {
+                Knight knight = new Knight();
+            }
+        }
+
         static void Main(string[] args)
         {
-            TEXTRPG t = new TEXTRPG();
         }
     }
 }
