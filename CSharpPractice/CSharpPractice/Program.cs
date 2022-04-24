@@ -790,7 +790,10 @@ namespace CSharpPractice
         class 객체지향_여행
         {
             // 객체(OOP Object Oriented Programming)
-            // OOP(은닉성/상속성/다형성)
+            // OOP(은닉성/상속성/다형성=Polymorphism)
+
+            // 접근 한정자
+            // public protected private
 
             class Player // 부모 / 기반
             {
@@ -831,12 +834,12 @@ namespace CSharpPractice
                 }
             }
 
-            class Mage
+            class Mage : Player
             {
 
             }
 
-            class Archer
+            class Archer : Player
             {
 
             }
@@ -892,9 +895,43 @@ namespace CSharpPractice
                 }
             }
 
+            void EnterGame(Player player)
+            {
+                // 인자로 들어온 player가 Mage 타입인지 확인 (true/false)
+                bool isMage = (player is Mage);
+
+                // 인자로 들어온 player가 Mage면 mage 변수에 넣기 (value/null)
+                Mage mage = (player as Mage);
+                if (mage != null)
+                {
+                    
+                }
+
+                // 인자로 들어온 player가 Knight면 knight 변수에 넣기 (value/null)
+                Knight knight = (player as Knight);
+                if (knight != null)
+                {
+
+                }
+            }
+
+            Player FindPlayerById(int id)
+            {
+                // id에 해당하는 플레이를 탐색
+
+                // 못찾았으면
+                return null;
+            }
+
             public 객체지향_여행()
             {
                 Knight knight = new Knight();
+                Mage mage = new Mage();
+
+                Player magePlayer = mage;
+                Mage mage2 = (Mage)magePlayer;
+
+                EnterGame(mage);
             }
         }
 
